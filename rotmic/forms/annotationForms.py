@@ -13,24 +13,9 @@
 ## GNU Affero General Public License for more details.
 ## You should have received a copy of the GNU Affero General Public
 ## License along with rotmic. If not, see <http://www.gnu.org/licenses/>.
+import django.forms as forms
 
-## NOTE: the order of imports matters during creation of a new DB!
-
-from rotmic.models.userprofile import UserProfile
-
-from rotmic.models.attachments import ComponentAttachment, SampleAttachment
-
-from rotmic.models.units import Unit
-
-from rotmic.models.componentTypes import ComponentType, DnaComponentType, \
-     CellComponentType, OligoComponentType, ChemicalType
-
-from rotmic.models.components import Component, DnaComponent, CellComponent, \
-     OligoComponent, ChemicalComponent
-
-from rotmic.models.samples import Sample, DnaSample, CellSample, OligoSample,\
-     ChemicalSample, SampleProvenance, SampleProvenanceType
-
-from rotmic.models.storage import Location, Rack, Container
-
-from rotmic.models.annotations import SequenceAnnotation, DnaAnnotation
+class SequenceAnnotationForm(forms.ModelForm):
+    """Form for a single annotation -- to be used within a ModelFormset"""
+    
+    pass
