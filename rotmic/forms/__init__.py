@@ -25,3 +25,5 @@ from sampleForms import SampleForm, DnaSampleForm, CellSampleForm, \
      OligoSampleForm, ChemicalSampleForm, SampleProvenanceForm
 
 from uploadForms import TableUploadForm
+
+from annotationForms import DnaAnnotationFormSet

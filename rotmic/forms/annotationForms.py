@@ -14,8 +14,23 @@
 ## You should have received a copy of the GNU Affero General Public
 ## License along with rotmic. If not, see <http://www.gnu.org/licenses/>.
 import django.forms as forms
+from django.forms.models import inlineformset_factory
+from django.http import HttpResponseRedirect
 
-class SequenceAnnotationForm(forms.ModelForm):
+from rotmic.models import DnaAnnotation, DnaComponent
+
+class SingleDnaAnnotationForm(forms.ModelForm):
     """Form for a single annotation -- to be used within a ModelFormset"""
     
-    pass
+    class Meta:
+        model = DnaAnnotation
+        fields = ['subComponent', 'bioStart', 'bioEnd', 'hardLink', 'strand']
+
+
+DnaAnnotationFormSet = inlineformset_factory(
+    DnaComponent, DnaAnnotation, 
+    fk_name='parentComponent',
+    form=SingleDnaAnnotationForm,
+    extra=2,
+    )
+

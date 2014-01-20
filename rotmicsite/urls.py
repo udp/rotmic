@@ -33,6 +33,8 @@ urlpatterns = patterns('',
     url(r'^selectable/', include('selectable.urls')),
 
     url(r'^rotmic/dnacomponent/(?P<pk>.*)/genbank/$',V.view_genbankfile,name='genbankfile'),
+    url(r'^rotmic/dnacomponent/(?P<pk>.*)/annotations/$',V.AnnotationEditView.as_view(),
+        name='dna_annotations'),
 
     url(r'^rotmic/upload/dna/$', V.DnaXlsUploadView.as_view(), name='upload_dnacomponent'),
     url(r'^rotmic/upload/cell/$', V.CellXlsUploadView.as_view(), name='upload_cellcomponent'),

@@ -1,5 +1,5 @@
 ## Rotten Microbes (rotmic) -- Laboratory Sequence and Sample Management
-## Copyright 2013 Raik Gruenberg
+## Copyright 2013-2014 Raik Gruenberg
 
 ## This file is part of the rotmic project (https://github.com/graik/rotmic).
 ## rotmic is free software: you can redistribute it and/or modify
@@ -21,8 +21,8 @@ from django.db import models
 from .components import UserMixin, DnaComponent
 from .componentTypes import DnaComponentType
 
-class SequenceAnnotation(UserMixin):
-    """Base class for annotations with or without links to components"""
+class SequenceAnnotation(models.Model):
+    """Base class for annotations between different kind of components"""
 
     bioStart = models.PositiveIntegerField('from position', blank=True, null=True,
                                         help_text='starting position (beginning with 1)')
@@ -45,6 +45,9 @@ class SequenceAnnotation(UserMixin):
 class DnaAnnotation(SequenceAnnotation):
     """Annotation of sequence regions in Components"""
 
+    parentComponent = models.ForeignKey(DnaComponent, blank=False,
+                                        related_name='annotations')
+    
     subComponent = models.ForeignKey(DnaComponent, verbose_name='Target DNA', blank=True, null=True )
 
     preceedes = models.ForeignKey('DnaAnnotation', verbose_name='Next', blank=True, null=True)
@@ -52,6 +55,3 @@ class DnaAnnotation(SequenceAnnotation):
     class Meta:
         app_label = 'rotmic'        
         abstract = False
-
-
-    
