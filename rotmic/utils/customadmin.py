@@ -11,6 +11,7 @@ from django.template.response import TemplateResponse
 from django.contrib.admin.util import unquote, flatten_fieldsets, get_deleted_objects, model_format_dict
 from django.utils.translation import ugettext as _
 from django.utils.encoding import force_text
+import django.utils.html as html
 
 ## imports for show / display links
 from django.utils.safestring import mark_safe
@@ -130,7 +131,7 @@ class ViewFirstModelAdmin( GuardedModelAdmin ):
 ##            raise PermissionDenied
 
         if obj is None:
-            raise Http404(_('%(name)s object with primary key %(key)r does not exist.') % {'name': force_text(opts.verbose_name), 'key': escape(object_id)})
+            raise Http404(_('%(name)s object with primary key %(key)r does not exist.') % {'name': force_text(opts.verbose_name), 'key': html.escape(object_id)})
         
         context = {
 ##            'title': _('Read %s') % force_text(opts.verbose_name),
